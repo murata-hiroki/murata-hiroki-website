@@ -891,11 +891,34 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
   .activity-grid { grid-template-columns: 1fr; }
   .nav-inner { padding: 0 18px; }
   .hero-inner { padding: 96px 20px 24px; gap: 24px; }
-  .hero-copy h1 { font-size: clamp(28px, 8vw, 38px); }
-  .hero-lead { font-size: 14.5px; line-height: 1.8; }
-  .hero-signature { height: 64px; margin-bottom: 12px; }
+
+  /* Shrink hero copy so it sits lower and doesn't overlap the portrait's face */
+  .hero-copy { padding: 22px 22px 30px; max-width: 400px; left: 0; right: 0; margin: 0 auto; }
+  .role-pill { font-size: 12.5px; padding: 5px 14px; margin-bottom: 12px; }
+  .hero-copy h1 { font-size: clamp(28px, 7.5vw, 36px); line-height: 1.25; margin-bottom: 12px; }
+  .hero-lead { font-size: 15px; line-height: 1.75; margin-bottom: 12px; max-width: 320px; }
+  .hero-signature { height: 50px; margin-bottom: 10px; }
+  .hero-who { padding-top: 10px; }
+  .hero-who .who-name { font-size: clamp(30px, 6vw, 38px); }
+
+  /* Notice pill — keep on one line; truncate title with ellipsis if needed */
   .notice-pill-wrap { margin-top: -24px; padding: 0 16px; }
-  .notice-pill { flex-wrap: wrap; }
+  .notice-pill {
+    flex-wrap: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .notice-pill .title {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .notice-pill .tag,
+  .notice-pill .date,
+  .notice-pill .arrow { flex-shrink: 0; }
+
   .about-grid, .activity-head, .promise-grid, .support-grid, .footer-inner, .footer-bottom { padding-left: 20px; padding-right: 20px; }
   .chronicle-inner { padding: 0 20px; }
   .promise-card { padding: 22px 20px; }
