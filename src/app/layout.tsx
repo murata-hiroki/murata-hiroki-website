@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Klee_One, Inter, JetBrains_Mono } from "next/font/google";
+import Loader from "@/components/Loader";
 import "./globals.css";
 
 const notoSansJp = Noto_Sans_JP({
@@ -53,7 +54,10 @@ export default function RootLayout({
       lang="ja"
       className={`${notoSansJp.variable} ${kleeOne.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Loader />
+        {children}
+      </body>
     </html>
   );
 }
