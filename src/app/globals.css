@@ -775,11 +775,11 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
     width: calc(100vw - 32px);
     max-width: 320px;
   }
-  .hero { min-height: 88svh; position: relative; overflow: hidden; }
+  .hero { min-height: 88lvh; position: relative; overflow: hidden; }
   .hero-panel { display: none; }
   .hero-inner {
     display: block;
-    min-height: 88svh;
+    min-height: 88lvh;
     padding: 0;
     position: relative;
   }
