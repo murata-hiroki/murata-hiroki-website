@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Klee_One, Inter, JetBrains_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Loader from "@/components/Loader";
 import "./globals.css";
 
@@ -58,6 +59,7 @@ export default function RootLayout({
         <Loader />
         {children}
       </body>
+      <GoogleAnalytics gaId="G-QXXZPFEQWD" />
     </html>
   );
 }
