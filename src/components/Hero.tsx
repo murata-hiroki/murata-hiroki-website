@@ -50,7 +50,7 @@ export default function Hero() {
 
         <div className="hero-visual">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="portrait" src="/assets/portrait.png" alt="村田 ひろき ポートレート" />
+          <img className="portrait" src="/assets/portrait.png" alt="村田 ひろき - 大阪維新の会 松原市政対策委員" />
         </div>
       </div>
     </section>
