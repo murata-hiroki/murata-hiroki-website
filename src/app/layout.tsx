@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP, Klee_One, Inter, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Loader from "@/components/Loader";
+import HokokukaiModal from "@/components/HokokukaiModal";
 import "./globals.css";
 
 const notoSansJp = Noto_Sans_JP({
@@ -234,6 +235,7 @@ export default function RootLayout({
       <body>
         <Loader />
         {children}
+        <HokokukaiModal />
       </body>
       <GoogleAnalytics gaId="G-QXXZPFEQWD" />
     </html>
