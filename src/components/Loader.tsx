@@ -1,14 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const SPLASH_KEY = "splash-shown-v1";
 const TOTAL_MS = 3000;
 
 export default function Loader() {
   const [hidden, setHidden] = useState(false);
+  const pathname = usePathname();
+  const onKoe = pathname?.startsWith("/koe") ?? false;
 
   useEffect(() => {
+    // LIFFフォーム(/koe)では起動スプラッシュを出さない
+    if (onKoe) return;
     if (sessionStorage.getItem(SPLASH_KEY)) {
       setHidden(true);
       return;
@@ -23,9 +28,9 @@ export default function Loader() {
       clearTimeout(t);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, [onKoe]);
 
-  if (hidden) return null;
+  if (hidden || onKoe) return null;
 
   return (
     <div className="splash" aria-hidden>

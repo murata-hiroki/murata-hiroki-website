@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const STORAGE_KEY = "murata_hokokukai_modal_dismissed_until";
 const REAPPEAR_AFTER_MS = 24 * 60 * 60 * 1000;
@@ -8,11 +9,15 @@ const OPEN_DELAY_MS = 1000;
 
 export default function HokokukaiModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   const ctaRef = useRef<HTMLAnchorElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    // LIFFフォーム(/koe)など、告知モーダルを出したくない画面では表示しない
+    if (pathname?.startsWith("/koe")) return;
+
     let suppressed = false;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -27,7 +32,7 @@ export default function HokokukaiModal() {
 
     const t = window.setTimeout(() => setIsOpen(true), OPEN_DELAY_MS);
     return () => window.clearTimeout(t);
-  }, []);
+  }, [pathname]);
 
   const close = useCallback(() => {
     try {
