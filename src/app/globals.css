@@ -1121,166 +1121,179 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
 }
 
 /* ===================================================================
-   /koe 「声を届ける」 LIFF フォーム（あたたかい・親しみ）
+   /koe 「声を届ける」 LIFF フォーム（refined / 白基調・緑は要所のみ）
    =================================================================== */
 .koe {
   min-height: 100dvh;
   background:
-    radial-gradient(130% 55% at 50% -8%, var(--green-soft) 0%, rgba(232,245,238,0) 62%),
-    var(--bg-alt);
-  padding: 0 0 calc(112px + env(safe-area-inset-bottom));
+    linear-gradient(180deg, var(--green-soft) 0%, rgba(232,245,238,0) 200px),
+    var(--bg);
+  padding: 0 0 calc(108px + env(safe-area-inset-bottom));
   font-family: var(--jp);
   line-height: 1.7;
+  color: var(--ink);
 }
 .koe-inner {
-  max-width: 560px;
+  max-width: 540px;
   margin: 0 auto;
-  padding: 44px 20px 0;
+  padding: 40px 22px 0;
 }
 
 /* --- ヘッダー --- */
-.koe-head { text-align: center; margin-bottom: 26px; }
-.koe-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #fff; color: var(--green-deep);
-  border: 1px solid var(--green-soft);
-  border-radius: 999px; padding: 7px 16px;
-  font-size: 12px; font-weight: 700; letter-spacing: .02em;
-  box-shadow: 0 8px 20px -14px rgba(20,40,30,.4);
-  margin-bottom: 18px;
+.koe-head { margin-bottom: 28px; }
+.koe-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 700; color: var(--green-deep);
+  letter-spacing: .02em; margin-bottom: 16px;
+}
+.koe-eyebrow .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); flex: 0 0 auto;
+  box-shadow: 0 0 0 4px var(--green-soft);
 }
 .koe-title {
   font-family: var(--hand);
-  font-size: 28px; font-weight: 700; line-height: 1.45;
+  font-size: 30px; font-weight: 700; line-height: 1.4;
   color: var(--ink); letter-spacing: .01em;
 }
-.koe-title .accent { color: var(--green); }
-.koe-sub { margin-top: 12px; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+.koe-title .accent {
+  color: var(--green);
+  background: linear-gradient(transparent 68%, rgba(0,160,64,.14) 0);
+}
+.koe-sub {
+  margin-top: 14px; font-size: 14px; line-height: 1.8; color: var(--ink-soft);
+  max-width: 30em;
+}
 
 /* --- カード --- */
 .koe-card {
-  background: #fff;
-  border-radius: 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 18px;
   padding: 22px 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 16px 44px -26px rgba(20,40,30,.28);
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(20,40,30,.04);
 }
-.koe-label {
-  display: block; font-family: var(--hand);
-  font-size: 17px; font-weight: 700; color: var(--ink);
-  margin-bottom: 14px; line-height: 1.5;
-}
-.koe-label-mt { margin-top: 22px; }
-.koe-label .req,
-.koe-label .opt {
-  display: inline-block; margin-left: 8px;
-  font-family: var(--jp); font-size: 11px; font-weight: 700;
-  border-radius: 999px; padding: 3px 9px; vertical-align: middle;
-}
-.koe-label .req { color: var(--green-deep); background: var(--green-soft); }
-.koe-label .opt { color: var(--ink-mute); background: var(--bg-alt); font-weight: 600; }
 
-/* --- チップ --- */
-.koe-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+/* --- ラベル行 --- */
+.koe-label-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px; margin-bottom: 14px;
+}
+.koe-label-row.koe-label-mt { margin-top: 22px; }
+.koe-label {
+  font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.5;
+}
+.koe-req, .koe-opt {
+  flex: 0 0 auto; font-size: 11px; font-weight: 700;
+  border-radius: 6px; padding: 3px 8px; letter-spacing: .02em;
+}
+.koe-req { color: var(--green-deep); background: var(--green-soft); }
+.koe-opt { color: var(--ink-mute); background: var(--bg-alt); font-weight: 600; }
+
+/* --- チップ（2列グリッド・白基調） --- */
+.koe-chips {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
 .koe-chip {
-  appearance: none; cursor: pointer;
-  border: 1.5px solid var(--green-soft);
-  background: var(--green-soft); color: var(--green-deep);
-  border-radius: 999px; padding: 11px 17px;
-  font-size: 14px; font-weight: 700; font-family: var(--jp);
-  display: inline-flex; align-items: center;
-  transition: transform .12s ease, background .2s, color .2s, border-color .2s, box-shadow .2s;
+  appearance: none; cursor: pointer; text-align: left;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  border: 1.5px solid var(--line); background: var(--bg);
+  border-radius: 12px; padding: 13px 14px;
+  font-size: 14px; font-weight: 700; font-family: var(--jp); color: var(--ink-soft);
+  transition: transform .12s ease, background .18s, color .18s, border-color .18s;
 }
-.koe-chip:active { transform: scale(.94); }
+.koe-chip:active { transform: scale(.97); }
 .koe-chip[aria-pressed="true"] {
-  background: var(--green); color: #fff; border-color: var(--green);
-  box-shadow: 0 10px 22px -10px rgba(0,160,64,.55);
+  background: var(--green-soft); border-color: var(--green); color: var(--green-deep);
 }
-.koe-chip .tick {
-  font-size: 12px; overflow: hidden;
-  width: 0; opacity: 0; margin-right: 0;
-  transition: width .16s ease, opacity .16s ease, margin-right .16s ease;
+.koe-chip-mark {
+  flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--line); position: relative; transition: all .18s;
 }
-.koe-chip[aria-pressed="true"] .tick { width: 13px; opacity: 1; margin-right: 5px; }
+.koe-chip[aria-pressed="true"] .koe-chip-mark {
+  background: var(--green); border-color: var(--green);
+}
+.koe-chip[aria-pressed="true"] .koe-chip-mark::after {
+  content: ""; position: absolute; left: 5px; top: 2px;
+  width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
 
 /* --- 入力欄 --- */
 .koe-input, .koe-textarea {
   width: 100%; font-family: var(--jp); font-size: 16px;
   color: var(--ink); background: var(--bg-alt);
-  border: 1.5px solid transparent; border-radius: 14px;
-  padding: 13px 15px; outline: none; line-height: 1.65;
+  border: 1.5px solid transparent; border-radius: 12px;
+  padding: 13px 14px; outline: none; line-height: 1.7;
   transition: border-color .2s, background .2s, box-shadow .2s;
 }
 .koe-textarea { resize: none; }
 .koe-input::placeholder, .koe-textarea::placeholder { color: var(--ink-mute); }
 .koe-input:focus, .koe-textarea:focus {
-  background: #fff; border-color: var(--green);
-  box-shadow: 0 0 0 4px var(--green-soft);
+  background: var(--bg); border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-soft);
 }
 
 /* --- 返信トグル --- */
 .koe-toggle {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 14px; cursor: pointer;
+  gap: 16px; cursor: pointer;
 }
-.koe-toggle-text { font-family: var(--hand); font-size: 17px; font-weight: 700; color: var(--ink); }
+.koe-toggle-text { font-size: 16px; font-weight: 700; color: var(--ink); }
+.koe-toggle-hint {
+  display: block; margin-top: 3px;
+  font-size: 12px; font-weight: 400; color: var(--ink-mute); line-height: 1.5;
+}
 .koe-toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .koe-switch {
-  width: 52px; height: 31px; border-radius: 999px; flex: 0 0 auto;
+  width: 50px; height: 30px; border-radius: 999px; flex: 0 0 auto;
   background: var(--line); position: relative; transition: background .2s;
 }
 .koe-switch::after {
   content: ""; position: absolute; top: 3px; left: 3px;
-  width: 25px; height: 25px; border-radius: 50%; background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.22); transition: transform .22s ease;
+  width: 24px; height: 24px; border-radius: 50%; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.2); transition: transform .22s ease;
 }
 .koe-toggle input:checked + .koe-switch { background: var(--green); }
-.koe-toggle input:checked + .koe-switch::after { transform: translateX(21px); }
-.koe-toggle input:focus-visible + .koe-switch { box-shadow: 0 0 0 4px var(--green-soft); }
-.koe-name-wrap { margin-top: 18px; }
+.koe-toggle input:checked + .koe-switch::after { transform: translateX(20px); }
+.koe-toggle input:focus-visible + .koe-switch { box-shadow: 0 0 0 3px var(--green-soft); }
+.koe-name-wrap { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
 
-/* --- プライバシー注記 --- */
+/* --- プライバシー注記（控えめ・緑をやめる） --- */
 .koe-privacy {
-  display: flex; gap: 10px;
-  background: var(--green-soft);
-  border-radius: 16px; padding: 15px 16px;
-  font-size: 12px; line-height: 1.85; color: var(--ink-soft);
-  margin-bottom: 4px;
+  font-size: 12px; line-height: 1.9; color: var(--ink-mute);
+  padding: 2px 4px; margin: 2px 0 4px;
 }
-.koe-privacy .ico { flex: 0 0 auto; font-size: 14px; }
 
 /* --- エラー --- */
 .koe-error {
   background: #FDECEC; color: #B23A3A;
-  border-radius: 14px; padding: 13px 15px; font-size: 13px;
+  border-radius: 12px; padding: 13px 15px; font-size: 13px;
   margin-top: 14px; font-weight: 700; line-height: 1.6;
 }
 
-/* --- 送信バー（固定） --- */
+/* --- 送信バー（固定・唯一の強い緑） --- */
 .koe-bar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
-  background: linear-gradient(180deg, rgba(244,244,239,0) 0%, var(--bg-alt) 30%);
+  padding: 14px 22px calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, var(--bg) 34%);
 }
-.koe-bar-inner { max-width: 560px; margin: 0 auto; }
+.koe-bar-inner { max-width: 540px; margin: 0 auto; }
 .koe-submit {
   width: 100%; cursor: pointer; border: none;
   background: var(--green); color: #fff;
-  border-radius: 999px; padding: 17px 24px;
-  font-family: var(--jp); font-size: 16px; font-weight: 700; letter-spacing: .02em;
+  border-radius: 14px; padding: 17px 24px;
+  font-family: var(--jp); font-size: 16px; font-weight: 700; letter-spacing: .04em;
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  box-shadow: 0 16px 32px -12px rgba(0,160,64,.6);
+  box-shadow: 0 10px 24px -12px rgba(0,160,64,.7);
   transition: transform .12s ease, background .2s, box-shadow .2s;
 }
-.koe-submit:active { transform: scale(.98); }
-.koe-submit:disabled { background: #C7D2CC; box-shadow: none; cursor: not-allowed; }
-.koe-submit .arrow {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(255,255,255,.22);
-  display: inline-flex; align-items: center; justify-content: center; font-size: 13px;
-}
+.koe-submit:active { transform: scale(.985); }
+.koe-submit:hover:not(:disabled) { background: var(--green-deep); }
+.koe-submit:disabled { background: #CBD5CE; box-shadow: none; cursor: not-allowed; }
 .koe-spin {
-  width: 20px; height: 20px; border-radius: 50%;
+  width: 19px; height: 19px; border-radius: 50%;
   border: 2px solid rgba(255,255,255,.4); border-top-color: #fff;
   animation: koe-spin .7s linear infinite;
 }
@@ -1290,36 +1303,37 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
 .koe-thanks {
   min-height: 100dvh;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 32px 28px calc(32px + env(safe-area-inset-bottom));
-  background:
-    radial-gradient(130% 48% at 50% 22%, var(--green-soft) 0%, rgba(232,245,238,0) 62%),
-    var(--bg-alt);
+  text-align: center; padding: 32px 30px calc(32px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--green-soft) 0%, rgba(232,245,238,0) 240px), var(--bg);
   font-family: var(--jp);
 }
-.koe-thanks-sprout { font-size: 58px; margin-bottom: 18px; animation: koe-pop .55s ease both; }
+.koe-thanks-mark { color: var(--green); margin-bottom: 22px; animation: koe-pop .5s ease both; }
+.koe-thanks-mark svg { display: block; }
 .koe-thanks-title {
   font-family: var(--hand); font-size: 23px; font-weight: 700; line-height: 1.6;
   color: var(--ink); margin-bottom: 12px;
 }
-.koe-thanks-sub { font-size: 14px; line-height: 1.8; color: var(--ink-soft); margin-bottom: 32px; max-width: 320px; }
-.koe-back {
-  cursor: pointer; border: none; background: var(--green); color: #fff;
-  border-radius: 999px; padding: 16px 36px; font-size: 15px; font-weight: 700;
-  font-family: var(--jp); box-shadow: 0 14px 28px -12px rgba(0,160,64,.55);
-  transition: transform .12s ease, background .2s;
+.koe-thanks-sub {
+  font-size: 14px; line-height: 1.85; color: var(--ink-soft);
+  margin-bottom: 32px; max-width: 300px;
 }
-.koe-back:active { transform: scale(.97); }
+.koe-back {
+  cursor: pointer; border: 1.5px solid var(--green); background: var(--bg); color: var(--green-deep);
+  border-radius: 12px; padding: 14px 34px; font-size: 15px; font-weight: 700;
+  font-family: var(--jp); transition: transform .12s ease, background .2s;
+}
+.koe-back:active { transform: scale(.98); }
+.koe-back:hover { background: var(--green-soft); }
 
 /* --- 登場アニメーション --- */
 .koe-head { animation: koe-rise .5s ease both; animation-delay: .02s; }
 .koe-card { animation: koe-rise .5s ease both; }
 .koe-card:nth-of-type(1) { animation-delay: .07s; }
-.koe-card:nth-of-type(2) { animation-delay: .13s; }
-.koe-card:nth-of-type(3) { animation-delay: .19s; }
-@keyframes koe-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.koe-card:nth-of-type(2) { animation-delay: .12s; }
+.koe-card:nth-of-type(3) { animation-delay: .17s; }
+@keyframes koe-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes koe-pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .koe-head, .koe-card, .koe-thanks-sprout { animation: none; }
+  .koe-head, .koe-card, .koe-thanks-mark { animation: none; }
 }
-

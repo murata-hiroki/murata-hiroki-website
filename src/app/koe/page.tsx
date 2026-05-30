@@ -79,13 +79,23 @@ export default function KoePage() {
   if (status === 'done') {
     return (
       <main className="koe-thanks">
-        <div className="koe-thanks-sprout" aria-hidden="true">
-          🌱
+        <div className="koe-thanks-mark" aria-hidden="true">
+          <svg viewBox="0 0 52 52" width="52" height="52">
+            <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" strokeWidth="2.5" />
+            <path
+              d="M16 27l7 7 14-15"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
         <h1 className="koe-thanks-title" aria-live="polite">
           ありがとうございます。
           <br />
-          あなたの声が、まちを動かす一歩に。
+          たしかに、受け取りました。
         </h1>
         <p className="koe-thanks-sub">
           いただいた声は、これからのまちづくりに大切に活かします。
@@ -101,27 +111,26 @@ export default function KoePage() {
     <main className="koe">
       <div className="koe-inner">
         <header className="koe-head">
-          <span className="koe-badge">
-            <span aria-hidden="true">🌱</span> 聞かせてください
-          </span>
+          <p className="koe-eyebrow">
+            <span className="dot" aria-hidden="true" />
+            あなたの声は、村田ひろき本人に届きます
+          </p>
           <h1 className="koe-title">
             松原のこと、
             <br />
             <span className="accent">聞かせてください。</span>
           </h1>
           <p className="koe-sub">
-            気になっていること・困っていること、
-            <br />
-            なんでも大丈夫です。
+            気になっていること・困っていること、なんでも大丈夫です。
           </p>
         </header>
 
         {/* カテゴリ（必須・複数選択可） */}
         <section className="koe-card">
-          <span className="koe-label">
-            どんなことですか？
-            <span className="req">1つ以上えらぶ</span>
-          </span>
+          <div className="koe-label-row">
+            <span className="koe-label">どんなことですか？</span>
+            <span className="koe-req">1つ以上えらぶ</span>
+          </div>
           <div className="koe-chips">
             {CATEGORIES.map((c) => {
               const selected = categories.includes(c);
@@ -133,10 +142,8 @@ export default function KoePage() {
                   aria-pressed={selected}
                   onClick={() => toggleCategory(c)}
                 >
-                  <span className="tick" aria-hidden="true">
-                    ✓
-                  </span>
-                  {c}
+                  <span className="koe-chip-text">{c}</span>
+                  <span className="koe-chip-mark" aria-hidden="true" />
                 </button>
               );
             })}
@@ -145,10 +152,12 @@ export default function KoePage() {
 
         {/* 自由記述・地域（任意） */}
         <section className="koe-card">
-          <label className="koe-label" htmlFor="koe-message">
-            くわしく教えてください
-            <span className="opt">任意</span>
-          </label>
+          <div className="koe-label-row">
+            <label className="koe-label" htmlFor="koe-message">
+              くわしく教えてください
+            </label>
+            <span className="koe-opt">任意</span>
+          </div>
           <textarea
             id="koe-message"
             className="koe-textarea"
@@ -159,10 +168,12 @@ export default function KoePage() {
             placeholder="例：天美の〇〇交差点、子どもの登校が心配です"
           />
 
-          <label className="koe-label koe-label-mt" htmlFor="koe-area">
-            お住まいの地域
-            <span className="opt">任意</span>
-          </label>
+          <div className="koe-label-row koe-label-mt">
+            <label className="koe-label" htmlFor="koe-area">
+              お住まいの地域
+            </label>
+            <span className="koe-opt">任意</span>
+          </div>
           <input
             id="koe-area"
             className="koe-input"
@@ -177,7 +188,12 @@ export default function KoePage() {
         {/* 返信希望（任意） */}
         <section className="koe-card">
           <label className="koe-toggle">
-            <span className="koe-toggle-text">お返事を希望する</span>
+            <span className="koe-toggle-text">
+              お返事を希望する
+              <span className="koe-toggle-hint">
+                希望される方にだけ、LINEでお返事します
+              </span>
+            </span>
             <input
               type="checkbox"
               checked={wantsReply}
@@ -188,10 +204,12 @@ export default function KoePage() {
 
           {wantsReply && (
             <div className="koe-name-wrap">
-              <label className="koe-label" htmlFor="koe-name">
-                お名前（呼び名）
-                <span className="opt">任意</span>
-              </label>
+              <div className="koe-label-row">
+                <label className="koe-label" htmlFor="koe-name">
+                  お名前（呼び名）
+                </label>
+                <span className="koe-opt">任意</span>
+              </div>
               <input
                 id="koe-name"
                 className="koe-input"
@@ -207,14 +225,9 @@ export default function KoePage() {
 
         {/* プライバシー注記 */}
         <p className="koe-privacy">
-          <span className="ico" aria-hidden="true">
-            🔒
-          </span>
-          <span>
-            いただいた声は、村田ひろきの政治活動（政策づくり・活動報告）に活用します。
-            公開する場合は匿名化し、個人が特定される形では使いません。
-            お返事をご希望の場合のみ、LINEからご連絡します。
-          </span>
+          いただいた声は、村田ひろきの政治活動（政策づくり・活動報告）に活用します。
+          公開する場合は匿名化し、個人が特定される形では使いません。
+          お返事をご希望の場合のみ、LINEからご連絡します。
         </p>
 
         {status === 'error' && (
@@ -240,12 +253,7 @@ export default function KoePage() {
                 送信中…
               </>
             ) : (
-              <>
-                声を届ける
-                <span className="arrow" aria-hidden="true">
-                  →
-                </span>
-              </>
+              '声を届ける'
             )}
           </button>
         </div>
