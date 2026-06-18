@@ -18,12 +18,14 @@ type Status = 'editing' | 'sending' | 'done' | 'error';
 export default function KoePage() {
   const [profile, setProfile] = useState<LiffProfile | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
+  const [liffChecked, setLiffChecked] = useState(false);
 
   const [categories, setCategories] = useState<string[]>([]);
   const [message, setMessage] = useState('');
   const [area, setArea] = useState('');
   const [wantsReply, setWantsReply] = useState(false);
   const [contactName, setContactName] = useState('');
+  const [contact, setContact] = useState('');
 
   const [status, setStatus] = useState<Status>('editing');
 
@@ -34,6 +36,7 @@ export default function KoePage() {
       if (!active) return;
       setProfile(session.profile);
       setIdToken(session.idToken);
+      setLiffChecked(true);
     })();
     return () => {
       active = false;
@@ -46,7 +49,14 @@ export default function KoePage() {
     );
   };
 
-  const canSubmit = categories.length > 0 && status !== 'sending';
+  // LINE ログイン済みなら LINE で返信できる。未ログイン（外部ブラウザ等）で
+  // 返信を希望する場合は、連絡先の入力を必須にする。
+  const lineLinked = profile !== null;
+  const needsContact = wantsReply && liffChecked && !lineLinked;
+  const canSubmit =
+    categories.length > 0 &&
+    status !== 'sending' &&
+    (!needsContact || contact.trim().length > 0);
 
   const handleSubmit = async () => {
     if (!canSubmit) return;
@@ -63,6 +73,7 @@ export default function KoePage() {
           message,
           wantsReply,
           contactName,
+          contact,
         }),
       });
       const data = (await res.json().catch(() => null)) as { ok?: boolean } | null;
@@ -191,7 +202,9 @@ export default function KoePage() {
             <span className="koe-toggle-text">
               お返事を希望する
               <span className="koe-toggle-hint">
-                希望される方にだけ、LINEでお返事します
+                {lineLinked
+                  ? '希望される方にだけ、LINEでお返事します'
+                  : '希望される方にだけ、ご記入の連絡先にお返事します'}
               </span>
             </span>
             <input
@@ -219,6 +232,30 @@ export default function KoePage() {
                 maxLength={100}
                 placeholder="例：ひろき / 村田 など"
               />
+
+              {needsContact && (
+                <>
+                  <div className="koe-label-row koe-label-mt">
+                    <label className="koe-label" htmlFor="koe-contact">
+                      連絡先（メール または 電話番号）
+                    </label>
+                    <span className="koe-req">必須</span>
+                  </div>
+                  <input
+                    id="koe-contact"
+                    className="koe-input"
+                    type="text"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    maxLength={100}
+                    inputMode="email"
+                    placeholder="例：example@mail.com / 090-1234-5678"
+                  />
+                  <p className="koe-contact-note">
+                    LINE以外からのご利用のため、お返事用の連絡先をお願いします。
+                  </p>
+                </>
+              )}
             </div>
           )}
         </section>
@@ -227,7 +264,7 @@ export default function KoePage() {
         <p className="koe-privacy">
           いただいた声は、村田ひろきの政治活動（政策づくり・活動報告）に活用します。
           公開する場合は匿名化し、個人が特定される形では使いません。
-          お返事をご希望の場合のみ、LINEからご連絡します。
+          お返事をご希望の場合のみ、LINE または ご記入いただいた連絡先にご連絡します。
         </p>
 
         {status === 'error' && (

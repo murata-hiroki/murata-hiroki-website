@@ -23,6 +23,7 @@ type Payload = {
   message?: unknown;
   wantsReply?: unknown;
   contactName?: unknown;
+  contact?: unknown;
 };
 
 function clampString(value: unknown, max: number): string {
@@ -80,6 +81,7 @@ export async function POST(request: Request) {
   const area = clampString(body.area, SHORT_MAX);
   const wantsReply = body.wantsReply === true;
   const contactName = wantsReply ? clampString(body.contactName, SHORT_MAX) : '';
+  const contact = wantsReply ? clampString(body.contact, SHORT_MAX) : '';
 
   // 本人確認。検証できれば信頼できる userId を採用、無理なら匿名。
   // クライアント申告の profile.userId は信頼しない（なりすまし防止）。
@@ -108,6 +110,7 @@ export async function POST(request: Request) {
     message: message || null,
     wants_reply: wantsReply,
     contact_name: contactName || null,
+    contact: contact || null,
     source: 'liff-koe',
   });
 

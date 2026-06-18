@@ -34,10 +34,10 @@ export async function initLiff(liffId: string): Promise<LiffSession> {
     const liff = (await import('@line/liff')).default as Liff;
     await liff.init({ liffId });
 
-    // LINE アプリ内でログインしていなければログインへ誘導
+    // 未ログインでもログインへは飛ばさない。「匿名の声」として送信できるようにする。
+    // （LINE アプリ内なら通常すでにログイン済みなので、ここに来るのは主に外部ブラウザ。
+    //   無理にログインさせず、フォームをそのまま使ってもらう）
     if (!liff.isLoggedIn()) {
-      liff.login();
-      // login() はリダイレクトするため、戻ってくるまで待つ
       return { ready: true, profile: null, idToken: null };
     }
 
