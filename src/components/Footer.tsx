@@ -17,6 +17,7 @@ export default function Footer() {
             <a href="#promises">政策</a>
             <a href="#activity">活動報告</a>
             <a href="#support">サポート</a>
+            <a href="/koenkai">賛同会員（無料）</a>
           </div>
           <div className="footer-contact">
             <div className="footer-contact-label">お問い合わせ</div>

@@ -68,7 +68,23 @@ nav.top {
   content: ""; position: absolute; left: 20%; right: 20%; bottom: -8px;
   height: 2px; background: var(--green); border-radius: 2px;
 }
-.btn-pill { display: none; }
+.btn-pill {
+  margin-left: 20px; flex: 0 0 auto;
+  background: var(--green); color: #fff; border: none;
+  padding: 11px 16px 11px 22px; border-radius: 999px;
+  font-family: var(--jp); font-weight: 600; font-size: 13px;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 12px;
+  transition: background .2s, transform .12s ease;
+}
+.btn-pill:hover { background: var(--green-deep); }
+.btn-pill:active { transform: scale(.97); }
+.btn-pill .arrow-circle {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
 
 .hamburger {
   display: none;
@@ -102,6 +118,14 @@ nav.top {
   transition: background .15s, color .15s;
 }
 .mobile-menu a:hover, .mobile-menu a:focus { background: var(--bg-alt); color: var(--green); }
+.mobile-menu a.mobile-koenkai {
+  margin: 8px 18px; padding: 13px 20px; border-radius: 12px;
+  background: var(--green); color: #fff; font-weight: 700;
+  text-align: center; font-size: 15px;
+}
+.mobile-menu a.mobile-koenkai:hover, .mobile-menu a.mobile-koenkai:focus {
+  background: var(--green-deep); color: #fff;
+}
 .mobile-menu .contact { padding: 14px 24px; border-top: 1px solid var(--line); margin-top: 6px; }
 .mobile-menu .contact a { padding: 4px 0; font-size: 13px; font-family: var(--mono); }
 .btn-green-cta {
@@ -848,6 +872,7 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
   }
   .brand { display: none; }
   .nav-links { display: none; }
+  .btn-pill { display: none; }
   .hamburger {
     display: inline-flex;
     width: 44px; height: 44px;
@@ -1437,4 +1462,80 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
 
 @media (prefers-reduced-motion: reduce) {
   .koe-head, .koe-card, .koe-thanks-mark { animation: none; }
+}
+
+/* ===================================================================
+   /koenkai 後援会・賛同会員フォーム（/koe のデザインを踏襲）
+   =================================================================== */
+
+/* 入力欄の上に置く小ラベル（メール／電話 などの内訳） */
+.koe-sublabel {
+  display: block; margin-bottom: 8px;
+  font-size: 13px; font-weight: 700; color: var(--ink-soft);
+}
+.koenkai-sublabel-mt { margin-top: 16px; }
+
+/* 郵便番号など短い入力 */
+.koenkai-input-narrow { max-width: 180px; }
+
+/* 郵便番号の入力欄＋検索ステータスを横並び */
+.koenkai-zip-row {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.koenkai-zip-note {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 600; color: var(--ink-mute);
+}
+.koenkai-zip-spin {
+  width: 14px; height: 14px;
+  border-color: var(--green-soft); border-top-color: var(--green);
+}
+
+/* メール形式の警告 */
+.koenkai-warn { color: #B23A3A; font-weight: 600; }
+
+/* 年代チップ：3列・中央寄せ（マークは出さない） */
+.koenkai-chips-age { grid-template-columns: repeat(3, 1fr); }
+.koenkai-chip-age { justify-content: center; text-align: center; }
+.koenkai-chip-age .koe-chip-text { flex: 0 0 auto; text-align: center; }
+
+/* 同意チェックボックス */
+.koenkai-consent {
+  display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+}
+.koenkai-consent input {
+  position: absolute; opacity: 0; width: 1px; height: 1px;
+}
+.koenkai-consent-box {
+  flex: 0 0 auto; width: 22px; height: 22px; margin-top: 1px;
+  border: 1.5px solid var(--line); border-radius: 7px; background: var(--bg);
+  position: relative; transition: background .18s, border-color .18s;
+}
+.koenkai-consent input:checked + .koenkai-consent-box {
+  background: var(--green); border-color: var(--green);
+}
+.koenkai-consent input:checked + .koenkai-consent-box::after {
+  content: ""; position: absolute; left: 7px; top: 3px;
+  width: 6px; height: 11px; border: solid #fff; border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.koenkai-consent input:focus-visible + .koenkai-consent-box {
+  box-shadow: 0 0 0 3px var(--green-soft);
+}
+.koenkai-consent-text {
+  font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.6;
+}
+.koenkai-consent-hint {
+  display: block; margin-top: 7px;
+  font-size: 12px; font-weight: 400; color: var(--ink-mute); line-height: 1.7;
+}
+
+/* ハニーポット：画面外に隠す（display:none だと一部 bot に無視されるため） */
+.koenkai-hp {
+  position: absolute; left: -9999px; top: -9999px;
+  width: 1px; height: 1px; overflow: hidden;
+}
+
+@media (max-width: 380px) {
+  .koenkai-chips-age { grid-template-columns: repeat(2, 1fr); }
 }

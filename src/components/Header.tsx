@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const links = [
   { href: "#home", label: "ホーム" },
@@ -31,9 +32,9 @@ export default function Header() {
             </li>
           ))}
         </ul>
-        <button className="btn-pill">
-          ご意見・ご質問 <span className="arrow-circle">→</span>
-        </button>
+        <Link href="/koenkai" className="btn-pill">
+          賛同会員になる <span className="arrow-circle">→</span>
+        </Link>
         <button
           className="hamburger"
           aria-label={open ? "メニューを閉じる" : "メニューを開く"}
@@ -53,6 +54,9 @@ export default function Header() {
               {l.label}
             </a>
           ))}
+          <Link href="/koenkai" className="mobile-koenkai" onClick={close}>
+            賛同会員になる（無料）
+          </Link>
           <div className="contact">
             <a href="mailto:matsubara.murata@gmail.com" onClick={close}>matsubara.murata@gmail.com</a>
             <a href="tel:+817022085416" onClick={close}>070-2208-5416</a>
