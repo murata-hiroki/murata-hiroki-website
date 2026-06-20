@@ -1539,3 +1539,154 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
 @media (max-width: 380px) {
   .koenkai-chips-age { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ===================================================================
+   /admin/voices 声への返信 管理ページ（/koe のデザインを踏襲）
+   =================================================================== */
+
+.voices-page {
+  max-width: 560px; margin: 0 auto;
+  padding: 40px 22px calc(40px + env(safe-area-inset-bottom));
+  font-family: var(--jp);
+}
+.voices-head { margin-bottom: 22px; }
+.voices-title {
+  font-family: var(--hand);
+  font-size: 26px; font-weight: 700; line-height: 1.4; color: var(--ink);
+}
+.voices-sub {
+  margin-top: 10px; font-size: 14px; line-height: 1.8; color: var(--ink-soft);
+}
+
+/* --- フィルタ（ピル） --- */
+.voices-filters {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.voices-filter {
+  appearance: none; cursor: pointer; border: none;
+  font-family: var(--jp); font-size: 13px; font-weight: 700;
+  color: var(--ink-soft); background: var(--bg-alt);
+  border-radius: 999px; padding: 8px 14px;
+  transition: background .18s, color .18s;
+}
+.voices-filter:hover { background: var(--green-soft); }
+.voices-filter.is-active { background: var(--green); color: #fff; }
+
+/* --- 一覧・状態表示 --- */
+.voices-list { display: flex; flex-direction: column; gap: 14px; }
+.voices-note { font-size: 14px; color: var(--ink-mute); padding: 8px 2px; }
+.voices-note-err { color: #B23A3A; }
+
+/* --- カード（koe-card 準拠） --- */
+.voices-card {
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 18px; padding: 20px;
+  box-shadow: 0 1px 2px rgba(20,40,30,.04);
+}
+.voices-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 10px;
+}
+.voices-date { font-size: 12px; color: var(--ink-mute); }
+.voices-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.voices-badge {
+  flex: 0 0 auto; font-size: 11px; font-weight: 700;
+  border-radius: 6px; padding: 3px 8px; letter-spacing: .02em;
+}
+.voices-badge.is-reply { color: var(--green-deep); background: var(--green-soft); }
+.voices-badge.is-replied { color: #2563A0; background: #E6F0FA; }
+.voices-badge.is-closed { color: var(--ink-mute); background: var(--bg-alt); }
+
+.voices-name {
+  font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.5;
+}
+.voices-contact {
+  margin-left: 8px; font-size: 13px; font-weight: 400; color: var(--ink-mute);
+}
+.voices-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin-top: 6px; font-size: 12px; color: var(--ink-mute);
+}
+.voices-cat {
+  border-radius: 6px; padding: 2px 8px;
+  background: var(--bg-alt); color: var(--ink-soft); font-weight: 600;
+}
+.voices-message {
+  margin-top: 12px; white-space: pre-wrap; word-break: break-word;
+  font-size: 14px; line-height: 1.8; color: var(--ink);
+}
+
+/* --- 返信済み表示 --- */
+.voices-replied {
+  margin-top: 12px; border-radius: 12px; padding: 12px 14px;
+  background: var(--green-soft);
+}
+.voices-replied-head { font-size: 12px; color: var(--green-deep); font-weight: 700; }
+.voices-replied-text {
+  margin-top: 5px; white-space: pre-wrap; word-break: break-word;
+  font-size: 14px; line-height: 1.7; color: var(--ink);
+}
+
+/* --- 返信欄（koe-textarea / koe-submit 準拠） --- */
+.voices-reply { margin-top: 14px; }
+.voices-textarea {
+  width: 100%; font-family: var(--jp); font-size: 16px; color: var(--ink);
+  background: var(--bg-alt); border: 1.5px solid transparent; border-radius: 12px;
+  padding: 13px 14px; outline: none; line-height: 1.7; resize: vertical;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.voices-textarea::placeholder { color: var(--ink-mute); }
+.voices-textarea:focus {
+  background: var(--bg); border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-soft);
+}
+.voices-preview {
+  margin-top: 10px; border: 1px dashed var(--line); border-radius: 12px;
+  padding: 12px 14px; background: var(--bg-alt);
+}
+.voices-preview-head {
+  font-size: 11px; font-weight: 700; color: var(--ink-mute);
+  letter-spacing: .02em; margin-bottom: 7px;
+}
+.voices-preview-body {
+  white-space: pre-wrap; word-break: break-word;
+  font-size: 13px; line-height: 1.7; color: var(--ink-soft);
+}
+.voices-actions {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 12px;
+}
+.voices-send {
+  cursor: pointer; border: none; background: var(--green); color: #fff;
+  border-radius: 12px; padding: 12px 22px;
+  font-family: var(--jp); font-size: 15px; font-weight: 700; letter-spacing: .03em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  box-shadow: 0 8px 20px -12px rgba(0,160,64,.7);
+  transition: transform .12s ease, background .2s, box-shadow .2s;
+}
+.voices-send:active { transform: scale(.985); }
+.voices-send:hover:not(:disabled) { background: var(--green-deep); }
+.voices-send:disabled { background: #CBD5CE; box-shadow: none; cursor: not-allowed; }
+.voices-close {
+  cursor: pointer; border: none; background: transparent; color: var(--ink-mute);
+  font-family: var(--jp); font-size: 14px; font-weight: 600;
+  border-radius: 10px; padding: 10px 12px; transition: background .18s, color .18s;
+}
+.voices-close:hover:not(:disabled) { background: var(--bg-alt); color: var(--ink-soft); }
+.voices-close:disabled { opacity: .5; cursor: not-allowed; }
+.voices-spin {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.4); border-top-color: #fff;
+  animation: koe-spin .7s linear infinite;
+}
+.voices-noreply {
+  border-radius: 12px; padding: 12px 14px; background: var(--bg-alt);
+  font-size: 14px; color: var(--ink-mute);
+}
+.voices-msg-ok {
+  margin-top: 12px; border-radius: 12px; padding: 12px 14px;
+  background: var(--green-soft); color: var(--green-deep);
+  font-size: 14px; font-weight: 700;
+}
+.voices-msg-err {
+  margin-top: 10px; font-size: 13px; font-weight: 700; color: #B23A3A;
+}
