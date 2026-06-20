@@ -9,7 +9,7 @@ const links = [
   { href: "#promises", label: "政策" },
   { href: "#activity", label: "活動報告" },
   { href: "#support", label: "サポート" },
-  { href: "#footer", label: "お問い合わせ" },
+  { href: "/koe", label: "お問い合わせ" },
 ];
 
 export default function Header() {

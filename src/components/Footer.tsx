@@ -21,6 +21,7 @@ export default function Footer() {
           </div>
           <div className="footer-contact">
             <div className="footer-contact-label">お問い合わせ</div>
+            <a href="/koe">ご意見・ご要望を送る（声）</a>
             <a href="mailto:matsubara.murata@gmail.com">matsubara.murata@gmail.com</a>
             <a href="tel:+817022085416">070-2208-5416</a>
           </div>
