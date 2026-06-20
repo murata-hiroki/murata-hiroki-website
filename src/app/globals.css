@@ -778,6 +778,40 @@ nav.top {
   padding: 2px 6px; font-family: var(--mono); font-size: 10px;
   color: var(--green-deep); margin-top: 2px;
 }
+/* 賛同会員募集バナー（support-grid 全幅・QR付き） */
+.support-koenkai {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between; gap: 30px;
+  background: white; border: 1px solid var(--line); border-radius: 12px;
+  padding: 26px 30px; margin-top: 4px;
+}
+.support-koenkai-text { flex: 1 1 auto; min-width: 0; }
+.support-koenkai-text h3 {
+  font-family: var(--jp-display); font-weight: 900;
+  font-size: clamp(18px, 2vw, 22px); line-height: 1.5;
+  margin: 8px 0 10px;
+}
+.support-koenkai-text p {
+  color: var(--ink-soft); font-size: 13.5px; line-height: 1.95;
+  margin-bottom: 18px; max-width: 44em;
+}
+.support-koenkai-qr {
+  flex: 0 0 auto; display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+}
+.support-koenkai-qr img {
+  width: 132px; height: 132px; display: block;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: white; padding: 6px;
+}
+.support-koenkai-qr span {
+  font-size: 11px; color: var(--ink-mute); font-weight: 600;
+}
+@media (max-width: 760px) {
+  .support-koenkai { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .support-koenkai-qr { align-self: center; }
+}
+
 .support-icon {
   width: 52px; height: 52px; color: var(--green);
   flex-shrink: 0;

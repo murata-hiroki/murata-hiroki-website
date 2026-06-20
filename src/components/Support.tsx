@@ -49,6 +49,24 @@ export default function Support() {
             詳しく見る <span className="arrow-circle">→</span>
           </a>
         </div>
+
+        <div className="support-koenkai">
+          <div className="support-koenkai-text">
+            <span className="sec-kicker">賛同会員募集（会費無料）</span>
+            <h3>村田 ひろき 後援会に、ご賛同ください。</h3>
+            <p>
+              お名前とご連絡先のご登録だけで、賛同会員としてご参加いただけます。会費はかかりません。下のQRコード、またはボタンからご登録ください。
+            </p>
+            <a href="/koenkai" className="btn-green-cta">
+              賛同会員になる <span className="arrow-circle">→</span>
+            </a>
+          </div>
+          <div className="support-koenkai-qr">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/koenkai-qr.png" alt="賛同会員登録フォームのQRコード" />
+            <span>スマホで読み取って登録</span>
+          </div>
+        </div>
       </div>
     </section>
   );
