@@ -1481,6 +1481,7 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
   cursor: pointer; border: 1.5px solid var(--green); background: var(--bg); color: var(--green-deep);
   border-radius: 12px; padding: 14px 34px; font-size: 15px; font-weight: 700;
   font-family: var(--jp); transition: transform .12s ease, background .2s;
+  display: inline-block; text-decoration: none;
 }
 .koe-back:active { transform: scale(.98); }
 .koe-back:hover { background: var(--green-soft); }

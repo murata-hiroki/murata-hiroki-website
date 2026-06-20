@@ -19,6 +19,7 @@ export default function KoePage() {
   const [profile, setProfile] = useState<LiffProfile | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
   const [liffChecked, setLiffChecked] = useState(false);
+  const [inClient, setInClient] = useState(false);
 
   const [categories, setCategories] = useState<string[]>([]);
   const [message, setMessage] = useState('');
@@ -36,6 +37,7 @@ export default function KoePage() {
       if (!active) return;
       setProfile(session.profile);
       setIdToken(session.idToken);
+      setInClient(session.inClient);
       setLiffChecked(true);
     })();
     return () => {
@@ -111,9 +113,15 @@ export default function KoePage() {
         <p className="koe-thanks-sub">
           いただいた声は、これからのまちづくりに大切に活かします。
         </p>
-        <button type="button" className="koe-back" onClick={() => closeLiffWindow()}>
-          LINEに戻る
-        </button>
+        {inClient ? (
+          <button type="button" className="koe-back" onClick={() => closeLiffWindow()}>
+            LINEに戻る
+          </button>
+        ) : (
+          <a href="/" className="koe-back">
+            ホームに戻る
+          </a>
+        )}
       </main>
     );
   }

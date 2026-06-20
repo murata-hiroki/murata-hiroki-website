@@ -8,6 +8,8 @@ export type LiffProfile = {
 export type LiffSession = {
   /** LIFF 初期化に成功したか（LINE外ブラウザでは false になりうる） */
   ready: boolean;
+  /** LINE アプリ内（LIFF クライアント）で開かれているか。外部ブラウザなら false */
+  inClient: boolean;
   /** LINE ログイン済みのプロフィール。未取得・LINE外なら null */
   profile: LiffProfile | null;
   /** サーバーでの本人確認に使う ID トークン。未取得なら null */
@@ -16,6 +18,7 @@ export type LiffSession = {
 
 const EMPTY_SESSION: LiffSession = {
   ready: false,
+  inClient: false,
   profile: null,
   idToken: null,
 };
@@ -34,11 +37,13 @@ export async function initLiff(liffId: string): Promise<LiffSession> {
     const liff = (await import('@line/liff')).default as Liff;
     await liff.init({ liffId });
 
+    const inClient = liff.isInClient();
+
     // 未ログインでもログインへは飛ばさない。「匿名の声」として送信できるようにする。
     // （LINE アプリ内なら通常すでにログイン済みなので、ここに来るのは主に外部ブラウザ。
     //   無理にログインさせず、フォームをそのまま使ってもらう）
     if (!liff.isLoggedIn()) {
-      return { ready: true, profile: null, idToken: null };
+      return { ready: true, inClient, profile: null, idToken: null };
     }
 
     const profile = await liff.getProfile();
@@ -46,6 +51,7 @@ export async function initLiff(liffId: string): Promise<LiffSession> {
 
     return {
       ready: true,
+      inClient,
       profile: {
         userId: profile.userId,
         displayName: profile.displayName,
