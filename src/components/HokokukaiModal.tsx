@@ -7,6 +7,13 @@ const STORAGE_KEY = "murata_hokokukai_modal_dismissed_until";
 const REAPPEAR_AFTER_MS = 24 * 60 * 60 * 1000;
 const OPEN_DELAY_MS = 1000;
 
+/**
+ * 告知モーダルを出したくない画面（前方一致）。
+ * 記入してもらうことが目的のフォームは、開いた瞬間にモーダルで塞がない。
+ * ※ "/koe" は /koe と /koenkai の両方に前方一致する。
+ */
+const MODAL_SUPPRESSED_PREFIXES = ["/koe", "/volunteer"];
+
 export default function HokokukaiModal() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -15,8 +22,7 @@ export default function HokokukaiModal() {
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // LIFFフォーム(/koe)など、告知モーダルを出したくない画面では表示しない
-    if (pathname?.startsWith("/koe")) return;
+    if (MODAL_SUPPRESSED_PREFIXES.some((p) => pathname?.startsWith(p))) return;
 
     let suppressed = false;
     try {

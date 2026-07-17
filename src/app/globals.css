@@ -1725,3 +1725,88 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
 .voices-msg-err {
   margin-top: 10px; font-size: 13px; font-weight: 700; color: #B23A3A;
 }
+
+/* ===================================================================
+   /volunteer お手伝いのシフト登録フォーム（/koe のデザインを踏襲）
+   =================================================================== */
+
+/* 種別を選ぶまでの案内 */
+.vol-pick-hint { text-align: center; margin: 10px 0 4px; }
+
+/* お手伝いの方向け：何をお願いするかは後ほど個別にご相談する旨 */
+.vol-assign-note {
+  background: var(--bg-alt); border-radius: 12px; padding: 14px 15px;
+  font-size: 13px; line-height: 1.9; color: var(--ink-soft); margin-bottom: 16px;
+}
+
+/* 応援弁士向けの説明 */
+.vol-speaker-note {
+  background: var(--bg-alt); border-radius: 12px; padding: 14px 15px;
+  font-size: 13px; line-height: 1.9; color: var(--ink-soft); margin-bottom: 16px;
+}
+.vol-speaker-note strong { font-weight: 700; color: var(--ink); }
+
+.vol-grid-hint {
+  margin-bottom: 10px;
+  font-size: 12px; font-weight: 600; color: var(--ink-mute); line-height: 1.6;
+}
+
+/* --- シフト表（7日 × 4枠 = 28マス） --- */
+.vol-grid {
+  display: grid;
+  grid-template-columns: 54px repeat(4, 1fr);
+  gap: 6px;
+  align-items: center;
+}
+.vol-slot-head {
+  text-align: center; font-size: 11px; font-weight: 700;
+  color: var(--ink-mute); letter-spacing: .01em; padding-bottom: 2px;
+}
+
+/* 日付ラベル：タップでその日の 4 枠をまとめて選ぶ */
+.vol-day {
+  appearance: none; cursor: pointer; border: none; background: transparent;
+  font-family: var(--jp); text-align: left; padding: 0 2px;
+  display: flex; align-items: baseline; gap: 3px;
+  min-height: 48px; align-content: center; flex-wrap: wrap;
+  border-radius: 8px; transition: background .18s, color .18s;
+}
+.vol-day-date { font-size: 14px; font-weight: 700; color: var(--ink); }
+.vol-day-dow { font-size: 11px; font-weight: 600; color: var(--ink-mute); }
+.vol-day:active { transform: scale(.97); }
+.vol-day[aria-pressed="true"] { background: var(--green-soft); }
+.vol-day[aria-pressed="true"] .vol-day-date,
+.vol-day[aria-pressed="true"] .vol-day-dow { color: var(--green-deep); }
+
+/* 1 マス：指で押せる大きさを最優先（48px 以上） */
+.vol-cell {
+  appearance: none; cursor: pointer; position: relative;
+  min-height: 48px; width: 100%;
+  border: 1.5px solid var(--line); border-radius: 10px;
+  background: var(--bg-alt);
+  transition: transform .12s ease, background .18s, border-color .18s;
+}
+.vol-cell:active { transform: scale(.94); }
+.vol-cell:focus-visible, .vol-day:focus-visible {
+  outline: none; box-shadow: 0 0 0 3px var(--green-soft);
+}
+.vol-cell[aria-pressed="true"] {
+  background: var(--green); border-color: var(--green);
+}
+/* 選択時のチェックマーク */
+.vol-cell[aria-pressed="true"]::after {
+  content: ""; position: absolute;
+  left: 50%; top: 50%;
+  width: 6px; height: 11px; margin: -7px 0 0 -3px;
+  border: solid #fff; border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 380px) {
+  .vol-grid { grid-template-columns: 46px repeat(4, 1fr); gap: 5px; }
+  .vol-day-date { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vol-cell:active, .vol-day:active { transform: none; }
+}
