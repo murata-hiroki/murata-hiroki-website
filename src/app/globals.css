@@ -1576,6 +1576,71 @@ footer { background: white; padding: 40px 0 28px; border-top: 1px solid var(--li
 }
 
 /* ===================================================================
+   /kessei 村田ひろき後援会 総決起大会 参加申込フォーム（/koe を踏襲）
+   =================================================================== */
+
+/* 開催のご案内（案内状＝正本と一致・薄緑の情報カード） */
+.kessei-event { background: var(--green-soft); border-color: transparent; }
+.kessei-event-list { display: flex; flex-direction: column; gap: 12px; }
+.kessei-event-row {
+  display: grid; grid-template-columns: 76px 1fr; gap: 10px; align-items: baseline;
+}
+.kessei-event-row dt {
+  font-size: 12px; font-weight: 700; color: var(--green-deep);
+  letter-spacing: .02em; line-height: 1.7;
+}
+.kessei-event-row dd {
+  font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.7;
+  word-break: break-word;
+}
+.kessei-event-map {
+  display: inline-block; margin-left: 8px;
+  font-size: 12px; font-weight: 700; color: var(--green-deep);
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.kessei-event-note {
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(0,160,64,.16);
+  font-size: 13px; font-weight: 600; color: var(--green-deep); line-height: 1.7;
+}
+
+/* 補足ヒント（人数・紹介者の説明） */
+.kessei-party-hint {
+  margin: -4px 0 14px; font-size: 13px; line-height: 1.7; color: var(--ink-soft);
+}
+
+/* ご参加人数のステッパー（− / 数値 / ＋） */
+.kessei-stepper {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+}
+.kessei-step-btn {
+  flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%;
+  border: 1.5px solid var(--green); background: var(--bg);
+  color: var(--green-deep); font-size: 26px; font-weight: 700; line-height: 1;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--jp);
+  transition: transform .12s ease, background .18s, border-color .18s, color .18s;
+}
+.kessei-step-btn:active { transform: scale(.94); }
+.kessei-step-btn:hover:not(:disabled) { background: var(--green-soft); }
+.kessei-step-btn:focus-visible { box-shadow: 0 0 0 3px var(--green-soft); outline: none; }
+.kessei-step-btn:disabled {
+  border-color: var(--line); color: var(--ink-mute); cursor: not-allowed;
+}
+.kessei-step-value {
+  min-width: 84px; text-align: center;
+  font-family: var(--hand); font-size: 34px; font-weight: 700; color: var(--ink);
+  display: inline-flex; align-items: baseline; justify-content: center; gap: 4px;
+}
+.kessei-step-unit { font-size: 16px; font-weight: 700; color: var(--ink-soft); }
+
+/* サンクス画面のリンク（地図・トップの2つを縦に並べる） */
+.kessei-thanks-map { margin-bottom: 14px; }
+
+@media (max-width: 380px) {
+  .kessei-event-row { grid-template-columns: 64px 1fr; }
+}
+
+/* ===================================================================
    /admin/voices 声への返信 管理ページ（/koe のデザインを踏襲）
    =================================================================== */
 
