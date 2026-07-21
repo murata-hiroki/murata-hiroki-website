@@ -111,12 +111,12 @@ export default function KesseiPage() {
         <header className="koe-head">
           <p className="koe-eyebrow">
             <span className="dot" aria-hidden="true" />
-            村田ひろき後援会・総決起大会
+            2026年8月2日（日）開催
           </p>
           <h1 className="koe-title">
-            8月2日（日）、
+            村田ひろき後援会
             <br />
-            <span className="accent">ご一緒しませんか。</span>
+            <span className="accent">総決起大会</span>
           </h1>
           <p className="koe-sub">
             ご来場の人数を事前に把握するための、参加のお申込みフォームです。
